@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.com"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template1">
+<head>
+<meta charset="utf-8">
+<title>Page patients</title>
+
+
+</head>
+<body>
+		<div layout:fragment="pageContent">
+			<div class="card container mt-5">
+			<div class="card-header">
+				<h1>Liste des patients</h1>
+			</div>
+			<div class="card-body">
+	<form method="get" th:action="@{patients}">
+		<div class="form-group">
+			<label>Name</label>
+			<input type="text" name="keyword" th:value="${keyword}">
+			<button class="btn btn-success">Chercher</button>
+		</div>
+	</form>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Date naissance</th>
+				<th>Malade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p:${patients}">
+				<td th:text="${p.id}"></td>
+				<td th:text="${p.name}"></td>
+				<td th:text="${p.naissance}"></td>
+				<td th:text="${p.malade}"></td>
+				<td><a onclick="return confirm('Etes vous sur de vouloir supprimer ?')" class="btn btn-danger" 
+				th:href="@{deletePatient(id=${p.id},page=${currentPage},size=${size},keyword=${keyword})}">Delete</a></td>
+			</tr>
+			</tbody>
+		</table>
+			<ul class="nav nav-pills">
+				<li  th:each="page,status:${pages}">
+					<a  th:class="${status.index==currentPage?'btn btn-primary' :'btn'}"  th:href="@{patients(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a>
+				</li>
+			</ul>
+			</div>
+		</div>
+		</div>
+	
+</body>
+</html>
