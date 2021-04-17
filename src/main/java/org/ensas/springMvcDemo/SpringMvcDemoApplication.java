@@ -20,9 +20,9 @@ public class SpringMvcDemoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		patientRepository.save(new Patient(null,"hassan",new Date(),false));
-		patientRepository.save(new Patient(null,"hanane",new Date(),true));
-		patientRepository.save(new Patient(null,"mohamed",new Date(),false));
+		patientRepository.save(new Patient(null,"hassan",new Date(),false,4));
+		patientRepository.save(new Patient(null,"hanane",new Date(),true,5));
+		patientRepository.save(new Patient(null,"mohamed",new Date(),false,6));
 		
 		patientRepository.findAll().forEach(p->{
 			System.out.println(p);
